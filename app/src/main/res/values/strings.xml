@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Alfamet</string>
+    <string name="action_exit">Keluar</string>
+    <string name="action_clear_data">Hapus semua data</string>
+    <string name="search_product">Cari Barang</string>
+    <string name="data_not_found">Datat tidak ditemukan</string>
+    <string name="save">Simpan</string>
+    <string name="delete">Hapus</string>
+    <string name="search_note">* Pencarian bisa berdasarkan nama dan harga barang.</string>
+    <string name="product_name">Nama Barang</string>
+    <string name="price">Harga Barang</string>
+    <string name="product_name_blank">Nama Barang harus diisi</string>
+    <string name="price_blank">Harga Barang harus diisi</string>
+    <string name="price_zero">Harga Barang harus > 0</string>
+    <string name="delete_question">Anda yakin ingin menghapus barang ini ?</string>
+    <string name="delete_all_question">Anda yakin ingin menghapus semua data barang ?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="no_data">Data tidak ditemukan.</string>
+</resources>
