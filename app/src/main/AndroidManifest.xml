@@ -3,7 +3,7 @@
           package="com.berkah.alfamet">
 
     <application
-            android:allowBackup="true"
+            android:allowBackup="false"
             android:icon="@drawable/shop"
             android:label="@string/app_name"
             android:roundIcon="@drawable/shop"
@@ -21,10 +21,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.AddProductActivity"
-                  android:label="@string/app_name"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="stateHidden"/>
+        <activity
+                android:name=".view.activity.AddProductActivity"
+                android:label="@string/app_name"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

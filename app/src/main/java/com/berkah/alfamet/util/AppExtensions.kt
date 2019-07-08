@@ -8,7 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import com.berkah.alfamet.R
-import kotlinx.android.synthetic.main.bottom_sheet_confirmation.*
+import kotlinx.android.synthetic.main.bottom_sheet_confirmation_dialog.*
 import java.math.BigDecimal
 import java.text.DecimalFormat
 
@@ -45,10 +45,11 @@ fun AppCompatEditText.onChange(listener: (String) -> Unit) {
 
 fun AppCompatEditText.value(): String = text.toString()
 
-fun Context.bottomSheetConfirmation(message: String, yesListener: () -> Unit) {
+fun Context.bottomSheetConfirmationDialog(message: String, yesListener: () -> Unit) {
     BottomSheetDialog(this).apply {
         val contentView =
-            LayoutInflater.from(this@bottomSheetConfirmation).inflate(R.layout.bottom_sheet_confirmation, null)
+            LayoutInflater.from(this@bottomSheetConfirmationDialog)
+                .inflate(R.layout.bottom_sheet_confirmation_dialog, null)
         setContentView(contentView)
 
         tvMessage.text = message
@@ -57,6 +58,7 @@ fun Context.bottomSheetConfirmation(message: String, yesListener: () -> Unit) {
             yesListener()
             hide()
         }
+
         btnNo.setOnClickListener { hide() }
 
         show()

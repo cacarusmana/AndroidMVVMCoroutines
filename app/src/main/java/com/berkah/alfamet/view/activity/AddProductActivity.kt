@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import com.berkah.alfamet.R
 import com.berkah.alfamet.model.TProduct
+import com.berkah.alfamet.util.bottomSheetConfirmationDialog
 import com.berkah.alfamet.util.gone
 import com.berkah.alfamet.util.value
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -61,15 +61,13 @@ class AddProductActivity : BaseActivity() {
         }
 
         btnDelete.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setMessage(getString(R.string.delete_question))
-                .setPositiveButton(getString(R.string.yes)) { dialog, which ->
-                    val intent = Intent()
-                    intent.putExtra("object", product)
-                    intent.putExtra("delete", true)
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                }.setNegativeButton(getString(R.string.no), null).show()
+            bottomSheetConfirmationDialog(getString(R.string.delete_question)) {
+                val intent = Intent()
+                intent.putExtra("object", product)
+                intent.putExtra("delete", true)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            }
         }
     }
 

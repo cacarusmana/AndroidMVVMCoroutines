@@ -7,4 +7,6 @@
     <color name="gray">#D5D3D3</color>
     <color name="textColor">#4f5565</color>
     <color name="textHint">#858484</color>
+    <color name="lightGray">#DFDFDF</color>
+
 </resources>

@@ -10,7 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.berkah.alfamet.R
 import com.berkah.alfamet.model.TProduct
-import com.berkah.alfamet.util.bottomSheetConfirmation
+import com.berkah.alfamet.util.bottomSheetConfirmationDialog
 import com.berkah.alfamet.util.gone
 import com.berkah.alfamet.util.onChange
 import com.berkah.alfamet.util.visible
@@ -121,13 +121,7 @@ class MainActivity : BaseActivity() {
             android.R.id.home -> onBackPressed()
             R.id.action_settings -> finish()
             R.id.action_clear_data -> {
-//                AlertDialog.Builder(this)
-//                    .setMessage(getString(R.string.delete_all_question))
-//                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
-//                        mainViewModel.deleteAll()
-//                    }.setNegativeButton(getString(R.string.no), null).show()
-
-                bottomSheetConfirmation(getString(R.string.delete_all_question)) { mainViewModel.deleteAll() }
+                bottomSheetConfirmationDialog(getString(R.string.delete_all_question)) { mainViewModel.deleteAll() }
             }
         }
 
