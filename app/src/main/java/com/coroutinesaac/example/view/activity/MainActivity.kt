@@ -1,4 +1,4 @@
-package com.berkah.alfamet.view.activity
+package com.coroutinesaac.example.view.activity
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
@@ -8,14 +8,14 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.berkah.alfamet.R
-import com.berkah.alfamet.model.TProduct
-import com.berkah.alfamet.util.bottomSheetConfirmationDialog
-import com.berkah.alfamet.util.gone
-import com.berkah.alfamet.util.onChange
-import com.berkah.alfamet.util.visible
-import com.berkah.alfamet.view.adapter.MainAdapter
-import com.berkah.alfamet.viewmodel.MainViewModel
+import com.coroutinesaac.example.R
+import com.coroutinesaac.example.model.TProduct
+import com.coroutinesaac.example.util.bottomSheetConfirmationDialog
+import com.coroutinesaac.example.util.gone
+import com.coroutinesaac.example.util.onChange
+import com.coroutinesaac.example.util.visible
+import com.coroutinesaac.example.view.adapter.MainAdapter
+import com.coroutinesaac.example.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.math.BigDecimal

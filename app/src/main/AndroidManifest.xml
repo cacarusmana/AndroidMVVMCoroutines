@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.berkah.alfamet">
+          package="com.coroutinesaac.example">
 
     <application
             android:allowBackup="false"
@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".view.activity.MainActivity"
+                android:name="com.coroutinesaac.example.view.activity.MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="stateHidden">
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-                android:name=".view.activity.AddProductActivity"
+                android:name="com.coroutinesaac.example.view.activity.AddProductActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="stateHidden"/>

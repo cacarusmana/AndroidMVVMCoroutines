@@ -1,4 +1,4 @@
-package com.berkah.alfamet.view.activity
+package com.coroutinesaac.example.view.activity
 
 import android.content.Context
 import android.graphics.Rect

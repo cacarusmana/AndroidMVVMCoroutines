@@ -1,4 +1,4 @@
-package com.berkah.alfamet.util
+package com.coroutinesaac.example.util
 
 import android.content.Context
 import android.support.design.widget.BottomSheetDialog
@@ -7,7 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import com.berkah.alfamet.R
+import com.coroutinesaac.example.R
 import kotlinx.android.synthetic.main.bottom_sheet_confirmation_dialog.*
 import java.math.BigDecimal
 import java.text.DecimalFormat

@@ -1,10 +1,10 @@
-package com.berkah.alfamet.viewmodel
+package com.coroutinesaac.example.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import com.berkah.alfamet.model.TProduct
-import com.berkah.alfamet.repository.ProductRepository
+import com.coroutinesaac.example.model.TProduct
+import com.coroutinesaac.example.repository.ProductRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

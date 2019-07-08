@@ -1,7 +1,7 @@
-package com.berkah.alfamet.database
+package com.coroutinesaac.example.database
 
 import android.arch.persistence.room.*
-import com.berkah.alfamet.model.TProduct
+import com.coroutinesaac.example.model.TProduct
 import java.math.BigDecimal
 
 @Dao

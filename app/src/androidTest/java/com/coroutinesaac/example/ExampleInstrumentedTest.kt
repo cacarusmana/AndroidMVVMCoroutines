@@ -1,4 +1,4 @@
-package com.berkah.alfamet
+package com.coroutinesaac.example
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

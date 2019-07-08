@@ -1,15 +1,15 @@
-package com.berkah.alfamet.view.activity
+package com.coroutinesaac.example.view.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.MenuItem
-import com.berkah.alfamet.R
-import com.berkah.alfamet.model.TProduct
-import com.berkah.alfamet.util.bottomSheetConfirmationDialog
-import com.berkah.alfamet.util.gone
-import com.berkah.alfamet.util.value
+import com.coroutinesaac.example.R
+import com.coroutinesaac.example.model.TProduct
+import com.coroutinesaac.example.util.bottomSheetConfirmationDialog
+import com.coroutinesaac.example.util.gone
+import com.coroutinesaac.example.util.value
 import kotlinx.android.synthetic.main.activity_add_product.*
 import java.math.BigDecimal
 

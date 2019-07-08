@@ -1,9 +1,8 @@
-package com.berkah.alfamet.repository
+package com.coroutinesaac.example.repository
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
-import com.berkah.alfamet.database.AppDatabase
-import com.berkah.alfamet.model.TProduct
+import com.coroutinesaac.example.database.AppDatabase
+import com.coroutinesaac.example.model.TProduct
 
 class ProductRepository(application: Application) {
 

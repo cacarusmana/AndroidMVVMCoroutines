@@ -1,4 +1,4 @@
-package com.berkah.alfamet.model
+package com.coroutinesaac.example.model
 
 import android.arch.persistence.room.TypeConverter
 import java.math.BigDecimal

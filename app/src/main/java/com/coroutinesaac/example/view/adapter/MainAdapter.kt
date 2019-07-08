@@ -1,13 +1,13 @@
-package com.berkah.alfamet.view.adapter
+package com.coroutinesaac.example.view.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.berkah.alfamet.R
-import com.berkah.alfamet.model.TProduct
-import com.berkah.alfamet.util.toCurr
+import com.coroutinesaac.example.R
+import com.coroutinesaac.example.model.TProduct
+import com.coroutinesaac.example.util.toCurr
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.product_item_list.*
 
