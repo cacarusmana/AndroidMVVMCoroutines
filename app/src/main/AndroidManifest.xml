@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".view.ui.MainActivity"
+                android:name=".view.activity.MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="stateHidden">
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.ui.AddProductActivity"
+        <activity android:name=".view.activity.AddProductActivity"
                   android:label="@string/app_name"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="stateHidden"/>

@@ -17,7 +17,7 @@
                   android:orientation="horizontal">
 
         <TextView
-                android:id="@+id/tv_initial"
+                android:id="@+id/tvInitial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle_bg"
@@ -30,7 +30,7 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical">
             <TextView
-                    android:id="@+id/tv_product_name"
+                    android:id="@+id/tvProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Product Name"
@@ -38,7 +38,7 @@
                     android:textSize="16sp"/>
 
             <TextView
-                    android:id="@+id/tv_price"
+                    android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="IDR 25.000"

@@ -1,6 +1,7 @@
 package com.berkah.alfamet.repository
 
 import android.app.Application
+import android.arch.lifecycle.LiveData
 import com.berkah.alfamet.database.AppDatabase
 import com.berkah.alfamet.model.TProduct
 

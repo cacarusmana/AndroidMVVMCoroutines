@@ -5,48 +5,91 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.berkah.alfamet.model.TProduct
 import com.berkah.alfamet.repository.ProductRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
+
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
 
     private val productRepository = ProductRepository(application)
-    val products: MutableLiveData<MutableList<TProduct>> = MutableLiveData()
+    var products: MutableLiveData<MutableList<TProduct>> = MutableLiveData()
     private lateinit var allProducts: MutableList<TProduct>
 
     init {
-        getAll()
-    }
-
-    private fun getAll() {
-        doAsync {
-            allProducts = productRepository.getAll()
-            uiThread {
-                products.value = allProducts
-            }
+        launch {
+            fetchAndShowData()
         }
     }
 
+    private suspend fun getAll() {
+        allProducts = withContext(Dispatchers.IO) { productRepository.getAll() }
+    }
+
+    private fun fetchAndShowData(isSearch: Boolean = false, searchValue: String = "") {
+        launch {
+
+            if (isSearch) {
+                val filteredProducts = withContext(Dispatchers.Default) {
+                    allProducts.filter {
+                        it.productName.toLowerCase().contains(searchValue.toLowerCase())
+                                || it.price.toPlainString().contains(searchValue)
+                    }.toMutableList()
+                }
+
+                showData(filteredProducts)
+            } else {
+                getAll()
+                showData()
+            }
+
+        }
+    }
+
+
     fun search(value: String) {
-        var searchList: MutableList<TProduct> = mutableListOf()
-        searchList = allProducts.filter {
-            it.productName.toLowerCase().contains(value.toLowerCase()) || it.price.toPlainString().contains(value)
-        }.toMutableList()
-        products.value = searchList
+        fetchAndShowData(true, value)
+    }
+
+    private fun showData(products: MutableList<TProduct> = allProducts) {
+        this.products.value = products
     }
 
     fun save(product: TProduct) {
-        productRepository.save(product)
-        getAll()
+        launch {
+            launch(Dispatchers.IO) {
+                productRepository.save(product)
+            }
+
+            fetchAndShowData()
+        }
     }
 
     fun delete(product: TProduct) {
-        productRepository.delete(product)
-        getAll()
+        launch {
+            launch(Dispatchers.IO) {
+                productRepository.delete(product)
+            }
+
+            fetchAndShowData()
+        }
     }
 
     fun deleteAll() {
-        productRepository.deleteAll()
-        getAll()
+        launch {
+            launch(Dispatchers.IO) {
+                productRepository.deleteAll()
+            }
+
+            fetchAndShowData()
+        }
+    }
+
+    override fun onCleared() {
+        job.cancel()
+        super.onCleared()
     }
 }

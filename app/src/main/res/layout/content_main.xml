@@ -8,7 +8,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_main"
-        tools:context=".view.ui.MainActivity">
+        tools:context=".view.activity.MainActivity">
 
     <LinearLayout
             android:id="@+id/search_layout"
@@ -26,8 +26,8 @@
             android:paddingStart="10dp"
             android:paddingTop="7dp">
 
-        <EditText
-                android:id="@+id/et_search"
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -45,7 +45,7 @@
                 android:src="@drawable/magnifying"/>
     </LinearLayout>
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -56,8 +56,8 @@
             android:textSize="14sp"
             android:textStyle="italic"/>
 
-    <TextView
-            android:id="@+id/tv_no_data"
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -68,7 +68,7 @@
             android:layout_marginTop="10dp"/>
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/rvProducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"/>
