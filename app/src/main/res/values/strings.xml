@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alfamet</string>
+    <string name="app_name">AndroidMVVMCoroutines</string>
     <string name="action_exit">Keluar</string>
     <string name="action_clear_data">Hapus semua data</string>
     <string name="search_product">Cari Barang</string>
