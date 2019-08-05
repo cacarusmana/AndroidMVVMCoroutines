@@ -6,3 +6,4 @@ Tech Stack :
 - MVVM (Model View View Model)
 - Android Architecture Component (Room, View Model, Live Data)
 - Kotlin Coroutines
+- Dagger 2
