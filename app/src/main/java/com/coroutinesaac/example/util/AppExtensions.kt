@@ -5,7 +5,6 @@ import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.AppCompatEditText
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
 import com.coroutinesaac.example.R
 import kotlinx.android.synthetic.main.bottom_sheet_confirmation_dialog.*
@@ -38,7 +37,7 @@ fun AppCompatEditText.onChange(listener: (String) -> Unit) {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         override fun afterTextChanged(s: Editable?) {
-            listener(s.toString())
+            listener(s.toString().trim())
         }
     })
 }
@@ -47,10 +46,8 @@ fun AppCompatEditText.value(): String = text.toString()
 
 fun Context.bottomSheetConfirmationDialog(message: String, yesListener: () -> Unit) {
     BottomSheetDialog(this).apply {
-        val contentView =
-            LayoutInflater.from(this@bottomSheetConfirmationDialog)
-                .inflate(R.layout.bottom_sheet_confirmation_dialog, null)
-        setContentView(contentView)
+
+        setContentView(R.layout.bottom_sheet_confirmation_dialog)
 
         tvMessage.text = message
 

@@ -1,95 +1,99 @@
 package com.coroutinesaac.example.viewmodel
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
+import android.view.View
+import com.coroutinesaac.example.MainApp
 import com.coroutinesaac.example.model.TProduct
 import com.coroutinesaac.example.repository.ProductRepository
 import kotlinx.coroutines.*
+import timber.log.Timber
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
+class MainViewModel : ViewModel(), CoroutineScope {
 
-    private val job = Job()
+    private var job = Job()
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = job + Dispatchers.Main
 
 
-    private val productRepository = ProductRepository(application)
-    var products: MutableLiveData<MutableList<TProduct>> = MutableLiveData()
-    private lateinit var allProducts: MutableList<TProduct>
+    @Inject
+    lateinit var productRepository: ProductRepository
+
+    val products: MutableLiveData<MutableList<TProduct>> = MutableLiveData()
+    val loadingState: MutableLiveData<Int> = MutableLiveData()
+
 
     init {
-        launch {
-            fetchAndShowData()
+        MainApp.appComponent.inject(this)
+
+        loadingState.value = View.VISIBLE
+
+        launch(Dispatchers.Main) {
+//            insertDummy()
+
+            findProducts()
         }
     }
 
-    private suspend fun getAll() {
-        allProducts = withContext(Dispatchers.IO) { productRepository.getAll() }
+    private suspend fun insertDummy() = withContext(Dispatchers.IO) {
+        repeat(1_000) {
+            val product = TProduct(productName = "product $it", price = (100 * it).toBigDecimal())
+            productRepository.save(product)
+            Timber.i("loop at $it")
+        }
+
     }
 
-    private fun fetchAndShowData(isSearch: Boolean = false, searchValue: String = "") {
-        launch {
 
-            if (isSearch) {
-                val filteredProducts = withContext(Dispatchers.Default) {
-                    allProducts.filter {
-                        it.productName.toLowerCase().contains(searchValue.toLowerCase())
-                                || it.price.toPlainString().contains(searchValue)
-                    }.toMutableList()
+    fun findProducts(value: String = "") {
+        launch(Dispatchers.Main) {
+            loadingState.value = View.VISIBLE
+
+            val items = withContext(Dispatchers.IO) {
+                with(productRepository) {
+                    if (value == "") getAll() else findProducts(value)
                 }
-
-                showData(filteredProducts)
-            } else {
-                getAll()
-                showData()
             }
 
+            products.value = items
+            loadingState.value = View.GONE
         }
-    }
-
-
-    fun search(value: String) {
-        fetchAndShowData(true, value)
-    }
-
-    private fun showData(products: MutableList<TProduct> = allProducts) {
-        this.products.value = products
     }
 
     fun save(product: TProduct) {
-        launch {
-            launch(Dispatchers.IO) {
+        launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
                 productRepository.save(product)
             }
 
-            fetchAndShowData()
+            findProducts()
         }
     }
 
     fun delete(product: TProduct) {
-        launch {
-            launch(Dispatchers.IO) {
+        launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
                 productRepository.delete(product)
             }
 
-            fetchAndShowData()
+            findProducts()
         }
     }
 
     fun deleteAll() {
-        launch {
-            launch(Dispatchers.IO) {
+        launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
                 productRepository.deleteAll()
             }
 
-            fetchAndShowData()
+            findProducts()
         }
     }
 
     override fun onCleared() {
-        job.cancel()
+        coroutineContext.cancel()
         super.onCleared()
     }
 }

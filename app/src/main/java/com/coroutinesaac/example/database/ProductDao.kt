@@ -10,8 +10,8 @@ interface ProductDao {
     @Query("select * from TProduct order by productName")
     fun getAll(): MutableList<TProduct>
 
-    @Query("select * from TProduct WHERE productName LIKE :productName OR price LIKE :price order by productName")
-    fun find(productName: String, price: BigDecimal): MutableList<TProduct>
+    @Query("select * from TProduct WHERE productName LIKE :value OR price LIKE :value order by productName")
+    fun findProducts(value: String): MutableList<TProduct>
 
     @Insert
     fun insert(tProduct: TProduct)

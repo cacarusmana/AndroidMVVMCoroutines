@@ -27,37 +27,38 @@ class MainActivity : BaseActivity() {
         const val UPDATE_CODE = 11
     }
 
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var mainAdapter: MainAdapter
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
+
+    private val mainAdapter: MainAdapter by lazy {
+        MainAdapter(this, mutableListOf()) {
+            nextActivity(it, UPDATE_CODE)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initComponent()
+        initObserver()
+        initListener()
     }
 
     private fun initComponent() {
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        mainAdapter = MainAdapter(this, mutableListOf()) {
-            nextActivity(it, UPDATE_CODE)
-        }
 
         rvProducts.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = mainAdapter
         }
-
-        initObserver()
-        initListener()
     }
 
     private fun initListener() {
-        etSearch.onChange { mainViewModel.search(it) }
+        etSearch.onChange { mainViewModel.findProducts(it) }
 
         fab.setOnClickListener {
             nextActivity(requestCode = INSERT_CODE)
@@ -65,18 +66,26 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initObserver() {
-        mainViewModel.products.observe(this, Observer { products ->
+        with(mainViewModel) {
 
-            products?.let {
-                mainAdapter.notifyDataSetChanged(it)
+            this.loadingState.observe(this@MainActivity, Observer { visibility ->
+                visibility?.let { loading.visibility = it }
+            })
 
-                if (it.isEmpty())
-                    tvEmpty.visible()
-                else
-                    tvEmpty.gone()
-            }
+            this.products.observe(this@MainActivity, Observer { products ->
+                products?.let {
 
-        })
+                    mainAdapter.notifyDataSetChanged(it)
+
+                    if (it.isEmpty())
+                        tvEmpty.visible()
+                    else
+                        tvEmpty.gone()
+                }
+            })
+
+        }
+
     }
 
     private fun nextActivity(product: TProduct? = null, requestCode: Int) {
@@ -94,16 +103,16 @@ class MainActivity : BaseActivity() {
 
         if (resultCode == Activity.RESULT_OK) {
 
-            with(data?.getParcelableExtra<TProduct>("object")!!) {
+            data?.getParcelableExtra<TProduct>("object")?.let {
                 when (requestCode) {
                     INSERT_CODE -> {
-                        mainViewModel.save(this)
+                        mainViewModel.save(it)
                     }
                     UPDATE_CODE -> {
                         if (data.getBooleanExtra("delete", false))
-                            mainViewModel.delete(this)
+                            mainViewModel.delete(it)
                         else
-                            mainViewModel.save(this)
+                            mainViewModel.save(it)
                     }
                 }
             }

@@ -3,10 +3,11 @@
           package="com.coroutinesaac.example">
 
     <application
+            android:name=".MainApp"
             android:allowBackup="false"
-            android:icon="@drawable/shop"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:roundIcon="@drawable/shop"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
